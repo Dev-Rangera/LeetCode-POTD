@@ -1,0 +1,28 @@
+class Solution {
+public:
+    long long minCost(vector<int>& nums, vector<int>& cost) {
+        int n = nums.size();
+        vector<pair<int,int>> vp;
+        for(int i=0;i<n;i++)
+        vp.push_back({nums[i],cost[i]});
+        sort(vp.begin(),vp.end());
+        long long count = 0;
+        for(int i=0;i<n;i++)
+        count+=cost[i];
+        int equal;
+        long long temp = 0;
+        for(int i=0;i<n;i++)
+        {
+            temp+=vp[i].second;
+            if(temp>=(count+1)/2)
+            {equal = vp[i].first;
+            break;}
+        }
+        long long ans = 0;
+        for(int i=0;i<n;i++)
+        {
+            ans+=(abs(1LL*vp[i].first-equal)*1LL*vp[i].second);
+        }
+        return ans;
+    }
+};
