@@ -1,0 +1,38 @@
+class Solution {
+public:
+bool isPossible (vector<int>&batteries,long long mid,long long n)
+{
+    long long total = mid * n;
+
+    for(long long bTime : batteries)
+    {
+        total -= min(mid,bTime);
+
+    }
+    return (total<=0);
+}
+    long long maxRunTime(int n, vector<int>& batteries) {
+     long long low = 0,high = 0;
+     int size = batteries.size();
+     for(int i = 0;i<size;i++)
+     {
+        high += batteries[i];
+     }  
+     long long ans = 0;
+     while(low<=high)
+     {
+        long long mid = low +(high-low)/2;
+        if(isPossible(batteries,mid,n))
+        {
+            ans = mid;
+            low = mid+1;
+        }
+        else
+        {
+            high = mid - 1;
+        }
+     } 
+     return ans;
+
+    }
+};
