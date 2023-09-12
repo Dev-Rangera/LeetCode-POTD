@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int minDeletions(string s) {
+        unordered_map<char,int> um1;
+        for(int i=0;i<s.size();i++)
+        um1[s[i]]++;
+        unordered_map<int,int> um2;
+        int count=0;
+        for(auto &x: um1)
+        {
+            int z = x.second;
+            while(!um2.empty() && um2.find(z)!=um2.end())
+            {count++; z--;}
+            if(z!=0)
+            um2[z]++;
+        }
+        return count;
+    }
+};
