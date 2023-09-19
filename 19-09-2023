@@ -1,0 +1,32 @@
+class Solution {
+private:
+    bool check(vector<int>& nums, int x)
+    {
+        int count = 0;
+        for(int i=0;i<nums.size();i++)
+        {
+            if(nums[i]<=x)
+            count++;
+        }
+        if(count > x)
+        return true;
+        return false;
+    }
+public:
+    int findDuplicate(vector<int>& nums) {
+        int n = nums.size();
+        int s = 0;
+        int e = n;
+        int mid;
+        int ans=-1;
+        while(s<e)
+        {
+            mid = s+(e-s)/2;
+            if(check(nums,mid))
+            e = mid;
+            else
+            s = mid+1;
+        }
+        return e;
+    }
+};
